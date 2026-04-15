@@ -586,6 +586,7 @@ input[type="text"]:focus {
     align-items: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .role-badge .label { font-size: 0.6rem; letter-spacing: 2px; opacity: 0.6; }
@@ -632,18 +633,19 @@ input[type="text"]:focus {
 .local-identity {
     position: absolute;
     top: 1rem;
-    right: 2rem;
+    right: 0;
     background: var(--panel-color);
     backdrop-filter: blur(8px);
     border: 1px solid var(--accent-gold);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    border-right: none;
+    padding: 0.5rem 1rem 0.5rem 1.5rem;
+    border-radius: 20px 0 0 20px;
     font-size: 0.9rem;
     color: var(--accent-gold);
     display: flex;
     gap: 0.5rem;
-    z-index: 1500; /* Above modals (1000) */
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+    z-index: 1500;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
     animation: identityPulse 4s infinite;
 }
 

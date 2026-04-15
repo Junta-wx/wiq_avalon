@@ -198,11 +198,24 @@
 
     <!-- Role Reminder & Rules Link (Bottom Right) -->
     <div id="game-footer" class="game-footer hidden">
-        <div id="role-reminder" class="role-badge" data-tooltip="Click for Identity Details">
+        <div id="role-reminder" class="role-badge" title="Click for Identity Details">
             <span class="label">YOUR ROLE</span>
             <span id="reminder-role-name" class="name">?</span>
         </div>
         <button id="btn-view-rules" class="btn-icon" title="How to Play">📜 Rules</button>
+    </div>
+
+    <!-- Identity Modal -->
+    <div id="identity-modal" class="modal-overlay hidden">
+        <div class="modal glass-panel">
+            <h2 class="phase-badge" id="identity-header-team">YOUR IDENTITY</h2>
+            <h1 id="identity-role-name" class="subtitle" style="font-size: 3rem; margin-bottom: 0.5rem;">Role</h1>
+            <p id="identity-role-desc" style="font-style: italic; color: var(--text-secondary); margin-bottom: 2rem;">Description</p>
+            <div id="identity-knowledge" class="knowledge-box glass-panel" style="background: rgba(0,0,0,0.2); padding: 1.5rem;">
+                <!-- Knowledge entries here -->
+            </div>
+            <button id="btn-close-identity" class="btn secondary" style="margin-top: 2rem;">Return to Game</button>
+        </div>
     </div>
 
     <!-- Instructions / Rules Modal -->
