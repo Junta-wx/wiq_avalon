@@ -396,3 +396,24 @@ input[type="text"]:focus {
     z-index: 2000;
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
+
+.local-identity {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    background: var(--panel-color);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: var(--accent-gold);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 500;
+}
+
+.local-identity .label {
+    opacity: 0.6;
+    color: white;
+}

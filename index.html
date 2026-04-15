@@ -16,6 +16,11 @@
         <!-- Notification Overlay -->
         <div id="notification" class="notification hidden"></div>
 
+        <!-- Persistent Identity -->
+        <div id="local-identity" class="local-identity hidden">
+            <span class="label">ID:</span> <span id="display-local-name">-</span>
+        </div>
+
         <!-- Lobby Phase -->
         <section id="lobby-screen" class="screen active">
             <h1 class="title">AVALON</h1>
@@ -103,8 +108,9 @@
             <div class="main-layout">
                 <div class="game-status glass-panel">
                     <div id="current-phase-info">
-                        <h3 id="phase-title">Phase Name</h3>
-                        <p id="phase-instruction">Instruction...</p>
+                        <h4 id="phase-context" style="color: var(--accent-gold); font-size: 0.8rem; letter-spacing: 2px;">TEAM BUILDING</h4>
+                        <h2 id="phase-title" class="subtitle" style="margin: 0.5rem 0;">PROPOSAL</h2>
+                        <p id="phase-instruction" style="font-size: 0.9rem; color: var(--text-secondary);">Instruction...</p>
                     </div>
                 </div>
 
@@ -132,7 +138,8 @@
     <!-- Modals -->
     <div id="modal-overlay" class="modal-overlay hidden">
         <div id="vote-modal" class="modal glass-panel hidden">
-            <h3 id="vote-title">VOTE</h3>
+            <h2 class="title" style="font-size: 2rem; margin-bottom: 0.5rem;">APROVE TEAM?</h2>
+            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">Vote <strong>Approve</strong> if you trust the leader's chosen group.<br>Vote <strong>Reject</strong> if you suspect an agent of evil is on the team.</p>
             <div class="vote-buttons">
                 <button id="btn-vote-approve" class="btn approve">APPROVE</button>
                 <button id="btn-vote-reject" class="btn reject">REJECT</button>
@@ -140,8 +147,8 @@
         </div>
 
         <div id="quest-modal" class="modal glass-panel hidden">
-            <h3>QUEST ACTION</h3>
-            <p>Will you succeed or fail the quest?</p>
+            <h2 class="title" style="font-size: 2rem; margin-bottom: 0.5rem;">THE QUEST</h2>
+            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);"><strong>Secret Vote:</strong> Choose the outcome of the mission.<br><small>(Evil players can choose to Fail to sabotage the quest)</small></p>
             <div class="vote-buttons">
                 <button id="btn-quest-success" class="btn approve">SUCCESS</button>
                 <button id="btn-quest-fail" class="btn reject">FAIL</button>

@@ -97,6 +97,13 @@ class AvalonApp {
         setTimeout(() => n.classList.add('hidden'), 3000);
     }
 
+    updateIdentity() {
+        if (this.localPlayerName) {
+            document.getElementById('local-identity').classList.remove('hidden');
+            document.getElementById('display-local-name').innerText = this.localPlayerName;
+        }
+    }
+
     async createRoom() {
         this.localPlayerName = prompt('Enter your name:') || 'Player 1';
         this.network.createRoom(this.network.playerId);
@@ -113,6 +120,7 @@ class AvalonApp {
         });
         
         document.getElementById('display-room-id').innerText = this.network.playerId;
+        this.updateIdentity(); // Show name
         this.showScreen('room');
         this.render(this.game.state);
     }
@@ -123,6 +131,7 @@ class AvalonApp {
         
         this.localPlayerName = prompt('Enter your name:') || 'Guest';
         this.network.joinRoom(roomId, this.localPlayerName);
+        this.updateIdentity(); // Show name
         this.showScreen('room');
     }
 
@@ -332,15 +341,16 @@ class AvalonApp {
         }).join('');
 
         // Phase info
+        const context = document.getElementById('phase-context');
         const title = document.getElementById('phase-title');
         const instruction = document.getElementById('phase-instruction');
         const actionBar = document.getElementById('action-bar');
         actionBar.innerHTML = '';
 
-        title.innerText = state.phase;
-        
         if (state.phase === PHASES.PROPOSING) {
-            instruction.innerText = `${state.players[state.leaderIndex].name} is choosing a team of ${questSize}...`;
+            context.innerText = 'PHASE 1: TEAM BUILDING';
+            title.innerText = 'PROPOSAL';
+            instruction.innerText = `${state.players[state.leaderIndex].name} is choosing a team of ${questSize} players for the next quest.`;
             if (isLeader) {
                 const btn = document.createElement('button');
                 btn.className = 'btn primary';
@@ -353,26 +363,27 @@ class AvalonApp {
                 actionBar.appendChild(btn);
             }
         } else if (state.phase === PHASES.VOTING) {
-            instruction.innerText = `Voting on team: ${state.selectedTeam.map(id => state.players.find(p => p.id === id).name).join(', ')}`;
+            context.innerText = 'PHASE 1: TEAM BUILDING';
+            title.innerText = 'VOTING';
+            instruction.innerText = `Everyone: Do you approve of this team: ${state.selectedTeam.map(id => state.players.find(p => p.id === id).name).join(', ')}?`;
             if (!state.votes[this.network.playerId]) {
                 document.getElementById('modal-overlay').classList.remove('hidden');
                 document.getElementById('vote-modal').classList.remove('hidden');
             }
         } else if (state.phase === PHASES.QUEST) {
-            instruction.innerText = `The quest is underway! Waiting for results...`;
+            context.innerText = 'PHASE 2: THE QUEST';
+            title.innerText = 'SECRET VOTE';
+            instruction.innerText = `The chosen team is on the quest! Waiting for their secret success/fail results...`;
             const isOnTeam = state.selectedTeam.includes(this.network.playerId);
-            const alreadyVoted = state.questVotes.length > state.selectedTeam.indexOf(this.network.playerId) && state.selectedTeam.indexOf(this.network.playerId) !== -1;
-            // Note: questVotes logic needs to match player index properly, but since it's secret, we just check if this player should vote.
-            // Simplified secret voting: if you are on team and haven't voted, show modal.
-            // We'll track who voted locally in state in a real app, but for now we'll check if the player's vote is missing.
-            // (Self-correction: in this simplified engine, we'll use a local 'hasVoted' flag for the quest)
             if (isOnTeam && !this.localQuestVoted) {
                 document.getElementById('modal-overlay').classList.remove('hidden');
                 document.getElementById('quest-modal').classList.remove('hidden');
                 this.localQuestVoted = true;
             }
         } else if (state.phase === PHASES.ASSASSINATION) {
-            instruction.innerText = `Assassin is choosing who to kill...`;
+            context.innerText = 'FINAL PHASE';
+            title.innerText = 'ASSASSINATION';
+            instruction.innerText = `The forces of Good have succeeded 3 quests! Now the Assassin must try to identify Merlin...`;
             if (me.role === ROLE_TYPES.ASSASSIN) {
                 const targets = state.players.filter(p => ROLES[p.role].team === TEAMS.GOOD);
                 targets.forEach(t => {
