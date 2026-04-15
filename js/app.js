@@ -228,8 +228,7 @@ class AvalonApp {
 
     render(state) {
         console.log('Rendering phase:', state.phase, 'Players:', state.players.length, 'isHost:', this.network.isHost);
-        
-        // Auto-switch screens based on phase
+        this.updateIdentity(); // Ensure name is always showing
         if (state.phase === PHASES.LOBBY) {
             // If we have players, we are in the Waiting Room. 
             // If no players, we are still on the Main Menu.
@@ -365,8 +364,13 @@ class AvalonApp {
         } else if (state.phase === PHASES.VOTING) {
             context.innerText = 'PHASE 1: TEAM BUILDING';
             title.innerText = 'VOTING';
-            instruction.innerText = `Everyone: Do you approve of this team: ${state.selectedTeam.map(id => state.players.find(p => p.id === id).name).join(', ')}?`;
-            if (!state.votes[this.network.playerId]) {
+            const teamNames = state.selectedTeam.map(id => state.players.find(p => p.id === id).name);
+            instruction.innerText = `Everyone: Do you approve of this team: ${teamNames.join(', ')}?`;
+            
+            if (state.votes[this.network.playerId] === undefined) {
+                const teamListEl = document.getElementById('modal-team-list');
+                teamListEl.innerHTML = teamNames.map(name => `<div style="font-weight: bold; padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1)">👤 ${name}</div>`).join('');
+                
                 document.getElementById('modal-overlay').classList.remove('hidden');
                 document.getElementById('vote-modal').classList.remove('hidden');
             }

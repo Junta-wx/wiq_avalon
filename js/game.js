@@ -64,16 +64,20 @@ export class AvalonGame {
 
     submitVote(playerId, approve) {
         this.state.votes[playerId] = approve;
+        console.log(`Vote registered from ${playerId}: ${approve ? 'Approve' : 'Reject'}`);
         
         if (Object.keys(this.state.votes).length === this.state.players.length) {
             const approvals = Object.values(this.state.votes).filter(v => v).length;
+            const rejections = this.state.players.length - approvals;
+            console.log(`Voting complete! Approvals: ${approvals}, Rejections: ${rejections}`);
+
             if (approvals > this.state.players.length / 2) {
-                // Approved
+                console.log('Team Approved! Moving to Quest phase.');
                 this.state.phase = PHASES.QUEST;
                 this.state.questVotes = [];
                 this.state.rejections = 0;
             } else {
-                // Rejected
+                console.log('Team Rejected! Incrementing failure count.');
                 this.state.rejections++;
                 if (this.state.rejections >= 5) {
                     this.endGame(TEAMS.EVIL, '5 Rejections in a row!');

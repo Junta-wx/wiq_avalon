@@ -403,14 +403,21 @@ input[type="text"]:focus {
     right: 2rem;
     background: var(--panel-color);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--accent-gold);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-size: 0.9rem;
     color: var(--accent-gold);
     display: flex;
     gap: 0.5rem;
-    z-index: 500;
+    z-index: 1500; /* Above modals (1000) */
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+    animation: identityPulse 4s infinite;
+}
+
+@keyframes identityPulse {
+    0%, 100% { border-color: rgba(212, 175, 55, 0.3); }
+    50% { border-color: var(--accent-gold); box-shadow: 0 0 15px var(--accent-gold-glow); }
 }
 
 .local-identity .label {

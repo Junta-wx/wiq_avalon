@@ -138,8 +138,14 @@
     <!-- Modals -->
     <div id="modal-overlay" class="modal-overlay hidden">
         <div id="vote-modal" class="modal glass-panel hidden">
-            <h2 class="title" style="font-size: 2rem; margin-bottom: 0.5rem;">APROVE TEAM?</h2>
-            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">Vote <strong>Approve</strong> if you trust the leader's chosen group.<br>Vote <strong>Reject</strong> if you suspect an agent of evil is on the team.</p>
+            <h2 class="title" style="font-size: 2rem; margin-bottom: 0.5rem;">APPROVE TEAM?</h2>
+            <div id="modal-team-list" class="glass-panel" style="margin-bottom: 1rem; padding: 1rem; border-color: var(--accent-gold);">
+                <!-- Team names injected here -->
+            </div>
+            <p style="margin-bottom: 1rem; color: var(--text-secondary);">Do you want the players listed above to go on the Quest?</p>
+            <p style="margin-bottom: 1.5rem; font-size: 0.8rem; color: var(--accent-gold); opacity: 0.8;">
+                ⚠️ 5 consecutive rejections allow EVIL to seize victory automatically!
+            </p>
             <div class="vote-buttons">
                 <button id="btn-vote-approve" class="btn approve">APPROVE</button>
                 <button id="btn-vote-reject" class="btn reject">REJECT</button>
