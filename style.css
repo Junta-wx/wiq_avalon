@@ -257,6 +257,21 @@ input[type="text"]:focus {
     border-width: 2px;
 }
 
+.leader-badge {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-gold);
+    color: black;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
 /* Cards */
 .card-container {
     perspective: 1000px;

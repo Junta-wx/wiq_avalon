@@ -1,6 +1,6 @@
 import { AvalonGame, PHASES } from './game.js';
 import { NetworkManager, ACTION_TYPES } from './network.js';
-import { getInitialRoles, getKnowledge, ROLE_TYPES, TEAMS, GAME_CONFIGS } from './roles.js';
+import { getInitialRoles, getKnowledge, ROLE_TYPES, TEAMS, GAME_CONFIGS, ROLES } from './roles.js';
 
 class AvalonApp {
     constructor() {
@@ -162,8 +162,8 @@ class AvalonApp {
             const count = this.game.state.players.length;
             console.log('Attempting to start game with', count, 'players');
             
-            if (count < 2) {
-                this.notify('Need at least 2 players to start');
+            if (count < 5) {
+                this.notify('Need at least 5 players to start');
                 return;
             }
             
@@ -277,6 +277,10 @@ class AvalonApp {
         loyaltyTag.className = 'loyalty-tag';
         
         const roleInfo = ROLES[me.role];
+        if (!roleInfo) {
+            console.error('No role info found for:', me.role);
+            return;
+        }
         const team = roleInfo.team;
 
         // Add role-specific class and loyalty
@@ -402,6 +406,7 @@ class AvalonApp {
             pCard.innerHTML = `
                 <div class="player-avatar">👤</div>
                 <div class="player-name">${p.name}</div>
+                ${i === state.leaderIndex ? '<div class="leader-badge">LEADER</div>' : ''}
                 ${markers}
             `;
 
