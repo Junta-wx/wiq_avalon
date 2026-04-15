@@ -32,19 +32,19 @@ body {
     background-repeat: no-repeat;
     color: var(--text-primary);
     font-family: var(--font-body);
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .app-container {
     width: 100%;
     max-width: 1200px;
-    height: 100vh;
+    min-height: 100vh;
     padding: 2rem;
     position: relative;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .screen {
@@ -628,6 +628,7 @@ input[type="text"]:focus {
     font-weight: bold;
     z-index: 3000;
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    pointer-events: none;
 }
 
 .local-identity {
@@ -647,6 +648,11 @@ input[type="text"]:focus {
     z-index: 2500;
     box-shadow: -5px 0 15px rgba(0,0,0,0.3);
     animation: identityPulse 4s infinite;
+    pointer-events: none;
+}
+
+.local-identity *, .notification * {
+    pointer-events: auto;
 }
 
 @keyframes identityPulse {
