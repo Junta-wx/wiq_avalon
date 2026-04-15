@@ -48,15 +48,9 @@
             </div>
             
             <div id="host-controls" class="glass-panel hidden">
-                <h3>Game Settings</h3>
-                <div class="roles-selection" style="margin-bottom: 1rem;">
-                    <label><input type="checkbox" id="role-percival" checked> Percival</label>
-                    <label><input type="checkbox" id="role-morgana" checked> Morgana</label>
-                    <label><input type="checkbox" id="role-mordred"> Mordred</label>
-                    <label><input type="checkbox" id="role-oberon"> Oberon</label>
-                </div>
                 <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                     <button id="btn-start-game" class="btn primary">Start Game</button>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem; text-align: center;">Required: 5+ Players (Merlin & Assassin always included)</p>
                 </div>
             </div>
             
@@ -199,6 +193,40 @@
                 </ol>
             </div>
             <button id="btn-close-instructions" class="btn secondary" style="width: 100%; margin-top: 1rem;">CLOSE</button>
+        </div>
+    </div>
+
+    <!-- Role Reminder & Rules Link (Bottom Right) -->
+    <div id="game-footer" class="game-footer hidden">
+        <div id="role-reminder" class="role-badge" data-tooltip="Click for Identity Details">
+            <span class="label">YOUR ROLE</span>
+            <span id="reminder-role-name" class="name">?</span>
+        </div>
+        <button id="btn-view-rules" class="btn-icon" title="How to Play">📜 Rules</button>
+    </div>
+
+    <!-- Instructions / Rules Modal -->
+    <div id="instructions-modal" class="modal-overlay hidden">
+        <div class="modal glass-panel instructions-content">
+            <h2 class="subtitle">Avalon: Quick Guide</h2>
+            <div class="rules-scroll">
+                <h3>The Goal</h3>
+                <p><strong>Good</strong> wins if 3 Quests succeed. <strong>Evil</strong> wins if 3 Quests fail, or if the Assassin identifies Merlin at the end.</p>
+                
+                <h3>Phase 1: Team Building</h3>
+                <p>The Leader proposes a team. EVERYONE votes. If rejected 5 times in a row, Evil wins automatically.</p>
+                
+                <h3>Phase 2: The Quest</h3>
+                <p>Chosen players vote SUCCESS or FAIL. Good MUST Success. Evil can choose to Success (to hide) or Fail (to sabotage).</p>
+
+                <h3>Characters</h3>
+                <ul>
+                    <li><strong>Merlin:</strong> Knows who is Evil. Must remain hidden.</li>
+                    <li><strong>Assassin:</strong> If Evil loses, identifies Merlin to steal the win.</li>
+                    <li><strong>Servants/Minions:</strong> The backbone of each team.</li>
+                </ul>
+            </div>
+            <button id="btn-close-rules" class="btn secondary">Back to Game</button>
         </div>
     </div>
 

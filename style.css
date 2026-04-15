@@ -545,7 +545,67 @@ input[type="text"]:focus {
 
 .modal {
     animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 500px;
 }
+
+.instructions-content {
+    max-width: 600px !important;
+}
+
+.rules-scroll {
+    max-height: 400px;
+    overflow-y: auto;
+    text-align: left;
+    padding-right: 1rem;
+    margin: 1.5rem 0;
+}
+
+.rules-scroll h3 { color: var(--accent-gold); font-size: 1rem; margin: 1rem 0 0.5rem 0; }
+.rules-scroll p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
+.rules-scroll ul { padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem; }
+
+/* Game Footer & Role Badge */
+.game-footer {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 1000;
+}
+
+.role-badge {
+    background: var(--panel-color);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--accent-gold);
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+
+.role-badge .label { font-size: 0.6rem; letter-spacing: 2px; opacity: 0.6; }
+.role-badge .name { font-family: var(--font-heading); font-weight: bold; font-size: 1.1rem; color: var(--accent-gold); }
+
+.role-badge.good { border-color: #3498db; }
+.role-badge.evil { border-color: #e74c3c; }
+
+.btn-icon {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.btn-icon:hover { background: rgba(255, 255, 255, 0.2); }
 
 @keyframes modalPop {
     from { transform: scale(0.8); opacity: 0; }

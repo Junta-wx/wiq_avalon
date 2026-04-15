@@ -38,11 +38,20 @@ class AvalonApp {
         this.btnJoin.onclick = () => this.joinRoom();
 
         document.getElementById('link-how-to-play').onclick = () => {
-            document.getElementById('modal-overlay').classList.remove('hidden');
             document.getElementById('instructions-modal').classList.remove('hidden');
         };
 
-        document.getElementById('btn-close-instructions').onclick = () => this.hideModal();
+        document.getElementById('btn-close-instructions').onclick = () => {
+            document.getElementById('instructions-modal').classList.add('hidden');
+        };
+
+        document.getElementById('btn-view-rules').onclick = () => {
+            document.getElementById('instructions-modal').classList.remove('hidden');
+        };
+
+        document.getElementById('btn-close-rules').onclick = () => {
+            document.getElementById('instructions-modal').classList.add('hidden');
+        };
 
         // Room
         const startBtn = document.getElementById('btn-start-game');
@@ -97,10 +106,34 @@ class AvalonApp {
         setTimeout(() => n.classList.add('hidden'), 3000);
     }
 
-    updateIdentity() {
+    updateIdentity(state) {
         if (this.localPlayerName) {
             document.getElementById('local-identity').classList.remove('hidden');
             document.getElementById('display-local-name').innerText = this.localPlayerName;
+        }
+
+        const footer = document.getElementById('game-footer');
+        const me = state ? state.players.find(p => p.id === this.network.playerId) : null;
+
+        if (state && me && state.phase !== PHASES.LOBBY && state.phase !== PHASES.END) {
+            footer.classList.remove('hidden');
+            const roleInfo = ROLES[me.role];
+            const knowledge = getKnowledge(me.role, state.players);
+            
+            const reminderName = document.getElementById('reminder-role-name');
+            const reminderBadge = document.getElementById('role-reminder');
+            
+            reminderName.innerText = roleInfo.name;
+            reminderBadge.className = `role-badge ${roleInfo.team.toLowerCase()}`;
+            
+            // Populate Tooltip
+            const knowledgeText = knowledge.seen.length > 0 ? 
+                `\n\n${knowledge.text}\n${knowledge.seen.map(id => state.players.find(p => p.id === id)?.name || 'Unknown').join(', ')}` 
+                : '';
+            const tooltipText = `${roleInfo.description}${knowledgeText}`;
+            reminderBadge.setAttribute('data-tooltip', tooltipText);
+        } else {
+            footer.classList.add('hidden');
         }
     }
 
@@ -176,14 +209,7 @@ class AvalonApp {
                 return;
             }
             
-            const settings = {
-                percival: document.getElementById('role-percival').checked,
-                morgana: document.getElementById('role-morgana').checked,
-                mordred: document.getElementById('role-mordred').checked,
-                oberon: document.getElementById('role-oberon').checked
-            };
-            
-            let roles = getInitialRoles(count, settings);
+            let roles = getInitialRoles(count);
             
             if (!roles) {
                 this.notify('Critical Error: Could not generate roles');
@@ -228,7 +254,7 @@ class AvalonApp {
 
     render(state) {
         console.log('Rendering phase:', state.phase, 'Players:', state.players.length, 'isHost:', this.network.isHost);
-        this.updateIdentity(); // Ensure name is always showing
+        this.updateIdentity(state); // Enhanced identity check
         if (state.phase === PHASES.LOBBY) {
             // If we have players, we are in the Waiting Room. 
             // If no players, we are still on the Main Menu.
@@ -250,12 +276,15 @@ class AvalonApp {
         `).join('');
         document.getElementById('player-count').innerText = state.players.length;
         
-        if (this.network.isHost) {
+        if (this.network.isHost && state.phase === PHASES.LOBBY) {
             document.getElementById('host-controls').classList.remove('hidden');
             document.getElementById('client-waiting').classList.add('hidden');
-        } else {
+        } else if (state.phase === PHASES.LOBBY) {
             document.getElementById('host-controls').classList.add('hidden');
             document.getElementById('client-waiting').classList.remove('hidden');
+        } else {
+            document.getElementById('host-controls').classList.add('hidden');
+            document.getElementById('client-waiting').classList.add('hidden');
         }
     }
 
