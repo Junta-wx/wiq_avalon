@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avalon Online | Social Deduction</title>
+    <meta name="description" content="Play the social deduction game Avalon with your friends online via P2P.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+</head>
+<body>
+    <div id="app" class="app-container">
+        <!-- Notification Overlay -->
+        <div id="notification" class="notification hidden"></div>
+
+        <!-- Lobby Phase -->
+        <section id="lobby-screen" class="screen active">
+            <h1 class="title">AVALON</h1>
+            <div class="glass-panel main-menu">
+                <div class="create-section">
+                    <button id="btn-create-room" class="btn primary">Create New Room</button>
+                </div>
+                <div class="divider"><span>OR</span></div>
+                <div class="join-section">
+                    <input type="text" id="join-room-id" placeholder="Enter Room ID" autocomplete="off">
+                    <button id="btn-join-room" class="btn secondary">Join Room</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Waiting Room Phase -->
+        <section id="room-screen" class="screen">
+            <h2 class="subtitle">Room: <span id="display-room-id">...</span></h2>
+            <div class="glass-panel player-list-container">
+                <h3>Players (<span id="player-count">0</span>/10)</h3>
+                <ul id="player-list"></ul>
+            </div>
+            
+            <div id="host-controls" class="glass-panel hidden">
+                <h3>Game Settings</h3>
+                <div class="roles-selection">
+                    <label><input type="checkbox" id="role-percival" checked> Percival</label>
+                    <label><input type="checkbox" id="role-morgana" checked> Morgana</label>
+                    <label><input type="checkbox" id="role-mordred"> Mordred</label>
+                    <label><input type="checkbox" id="role-oberon"> Oberon</label>
+                </div>
+                <button id="btn-start-game" class="btn primary">Start Game</button>
+            </div>
+            
+            <div id="client-waiting" class="waiting-msg">
+                Waiting for host to start...
+            </div>
+        </section>
+
+        <!-- Role Reveal Phase -->
+        <section id="role-screen" class="screen">
+            <h2 class="title">Reveal Your Identity</h2>
+            <div class="card-container">
+                <div id="role-card" class="card hidden-role">
+                    <div class="card-front">?</div>
+                    <div class="card-back">
+                        <h3 id="role-name">Role Name</h3>
+                        <p id="role-desc">Role description goes here.</p>
+                        <div id="role-knowledge" class="knowledge-box"></div>
+                    </div>
+                </div>
+            </div>
+            <button id="btn-ready" class="btn primary">Ready</button>
+        </section>
+
+        <!-- Main Game Phase -->
+        <section id="game-screen" class="screen">
+            <div class="game-header">
+                <div class="quest-track" id="quest-track"></div>
+                <div class="fail-track">
+                    Rejections: <span id="rejection-count">0</span>/5
+                </div>
+            </div>
+
+            <div class="main-layout">
+                <div class="game-status glass-panel">
+                    <div id="current-phase-info">
+                        <h3 id="phase-title">Phase Name</h3>
+                        <p id="phase-instruction">Instruction...</p>
+                    </div>
+                </div>
+
+                <div id="player-board" class="player-board">
+                    <!-- Players rendered here -->
+                </div>
+            </div>
+
+            <div id="action-bar" class="action-bar">
+                <!-- Dynamic buttons based on phase -->
+            </div>
+        </section>
+
+        <!-- Game End Phase -->
+        <section id="end-screen" class="screen">
+            <h1 id="winner-title" class="title">VICTORY</h1>
+            <div class="end-summary glass-panel">
+                <p id="winner-msg">The forces of Good have prevailed!</p>
+                <div id="role-reveal-list"></div>
+                <button onclick="location.reload()" class="btn secondary">Play Again</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div id="vote-modal" class="modal glass-panel hidden">
+            <h3 id="vote-title">VOTE</h3>
+            <div class="vote-buttons">
+                <button id="btn-vote-approve" class="btn approve">APPROVE</button>
+                <button id="btn-vote-reject" class="btn reject">REJECT</button>
+            </div>
+        </div>
+
+        <div id="quest-modal" class="modal glass-panel hidden">
+            <h3>QUEST ACTION</h3>
+            <p>Will you succeed or fail the quest?</p>
+            <div class="vote-buttons">
+                <button id="btn-quest-success" class="btn approve">SUCCESS</button>
+                <button id="btn-quest-fail" class="btn reject">FAIL</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
