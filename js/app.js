@@ -87,26 +87,6 @@ class AvalonApp {
             document.getElementById('btn-ready').innerText = 'Waiting...';
         };
 
-        // Footer & Identity
-        document.getElementById('role-reminder').onclick = () => {
-            document.getElementById('identity-modal').classList.remove('hidden');
-        };
-
-        document.getElementById('btn-close-identity').onclick = () => {
-            document.getElementById('identity-modal').classList.add('hidden');
-        };
-
-        // Standard Modal Background Clicks
-        const modals = ['modal-overlay', 'instructions-modal', 'identity-modal'];
-        modals.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) {
-                el.onclick = (e) => {
-                    if (e.target === el) el.classList.add('hidden');
-                };
-            }
-        });
-
         // Leader
         document.getElementById('btn-proceed-to-roles').onclick = () => {
             this.network.send({ type: ACTION_TYPES.PROCEED_TO_ROLES });
@@ -161,25 +141,14 @@ class AvalonApp {
             const reminderBadge = document.getElementById('role-reminder');
             
             reminderName.innerText = roleInfo.name;
-            const team = roleInfo.team.toLowerCase();
-            reminderBadge.className = `role-badge ${team}`;
+            reminderBadge.className = `role-badge ${roleInfo.team.toLowerCase()}`;
             
-            // Populate Identity Modal Content
-            document.getElementById('identity-role-name').innerText = roleInfo.name;
-            document.getElementById('identity-role-desc').innerText = roleInfo.description;
-            
-            const header = document.getElementById('identity-header-team');
-            header.innerText = roleInfo.team.toUpperCase();
-            header.className = `phase-badge ${team}`;
-
-            const knowledgeBox = document.getElementById('identity-knowledge');
-            const seenNames = knowledge.seen.map(id => state.players.find(p => p.id === id)?.name || 'Unknown');
-            
-            knowledgeBox.innerHTML = `
-                <div style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 0.5rem">SECRET KNOWLEDGE:</div>
-                <div style="font-weight: bold; color: white;">${knowledge.text}</div>
-                <div style="margin-top: 0.5rem; color: var(--accent-gold);">${seenNames.length > 0 ? seenNames.join(', ') : 'None'}</div>
-            `;
+            // Populate Tooltip
+            const knowledgeText = knowledge.seen.length > 0 ? 
+                `\n\n${knowledge.text}\n${knowledge.seen.map(id => state.players.find(p => p.id === id)?.name || 'Unknown').join(', ')}` 
+                : '';
+            const tooltipText = `${roleInfo.description}${knowledgeText}`;
+            reminderBadge.setAttribute('data-tooltip', tooltipText);
         } else {
             footer.classList.add('hidden');
         }

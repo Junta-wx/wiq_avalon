@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,12 @@
     <meta name="description" content="Play the social deduction game Avalon with your friends online via P2P.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
 </head>
+
 <body>
     <div id="app" class="app-container">
         <!-- Lobby Phase -->
@@ -26,26 +29,31 @@
                     <button id="btn-join-room" class="btn secondary">Join Room</button>
                 </div>
                 <div class="lobby-footer" style="margin-top: 2rem;">
-                    <a id="link-how-to-play" style="color: var(--accent-gold); text-decoration: underline; cursor: pointer; font-size: 0.9rem;">How to Play</a>
+                    <a id="link-how-to-play"
+                        style="color: var(--accent-gold); text-decoration: underline; cursor: pointer; font-size: 0.9rem;">How
+                        to Play</a>
                 </div>
             </div>
         </section>
 
         <!-- Waiting Room Phase -->
         <section id="room-screen" class="screen">
-            <h2 class="subtitle">Room: <span id="display-room-id">...</span> <button id="btn-copy-id" class="btn secondary" style="padding: 5px 10px; font-size: 0.7rem; margin-left: 10px;">Copy</button></h2>
+            <h2 class="subtitle">Room: <span id="display-room-id">...</span> <button id="btn-copy-id"
+                    class="btn secondary" style="padding: 5px 10px; font-size: 0.7rem; margin-left: 10px;">Copy</button>
+            </h2>
             <div class="glass-panel player-list-container">
                 <h3>Players (<span id="player-count">0</span>/10)</h3>
                 <ul id="player-list"></ul>
             </div>
-            
+
             <div id="host-controls" class="glass-panel hidden">
                 <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                     <button id="btn-start-game" class="btn primary">Start Game</button>
-                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem; text-align: center;">Required: 5+ Players (Merlin & Assassin always included)</p>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem; text-align: center;">
+                        Required: 5+ Players (Merlin & Assassin always included)</p>
                 </div>
             </div>
-            
+
             <div id="client-waiting" class="waiting-msg">
                 Waiting for host to start...
             </div>
@@ -74,7 +82,8 @@
                         <div id="role-loyalty" class="loyalty-tag">LOYALTY</div>
                         <h2 id="role-name" class="subtitle" style="margin: 0.5rem 0;">Role Name</h2>
                         <hr style="width: 80%; border: 0.5px solid rgba(255,255,255,0.1); margin: 1rem 0;">
-                        <p id="role-desc" style="font-size: 0.9rem; font-style: italic; color: #ccc;">Role description goes here.</p>
+                        <p id="role-desc" style="font-size: 0.9rem; font-style: italic; color: #ccc;">Role description
+                            goes here.</p>
                         <div id="role-knowledge" class="knowledge-box"></div>
                     </div>
                 </div>
@@ -102,9 +111,12 @@
             <div class="main-layout">
                 <div class="game-status glass-panel">
                     <div id="current-phase-info">
-                        <h4 id="phase-context" style="color: var(--accent-gold); font-size: 0.8rem; letter-spacing: 2px;">TEAM BUILDING</h4>
+                        <h4 id="phase-context"
+                            style="color: var(--accent-gold); font-size: 0.8rem; letter-spacing: 2px;">TEAM BUILDING
+                        </h4>
                         <h2 id="phase-title" class="subtitle" style="margin: 0.5rem 0;">PROPOSAL</h2>
-                        <p id="phase-instruction" style="font-size: 0.9rem; color: var(--text-secondary);">Instruction...</p>
+                        <p id="phase-instruction" style="font-size: 0.9rem; color: var(--text-secondary);">
+                            Instruction...</p>
                     </div>
                 </div>
 
@@ -135,7 +147,8 @@
             <div class="phase-badge">PHASE 1: TEAM APPROVAL</div>
             <h2 class="title" style="font-size: 2.5rem; margin-bottom: 0.5rem;">APPROVE TEAM?</h2>
             <div id="modal-team-list" class="modal-team-display"></div>
-            <p style="margin-bottom: 1rem; color: var(--text-secondary);">Do you want the players listed above to go on the Quest?</p>
+            <p style="margin-bottom: 1rem; color: var(--text-secondary);">Do you want the players listed above to go on
+                the Quest?</p>
             <p style="margin-bottom: 1.5rem; font-size: 0.8rem; color: var(--accent-gold); opacity: 0.8;">
                 ⚠️ 5 consecutive rejections allow EVIL to seize victory automatically!
             </p>
@@ -149,22 +162,48 @@
             <div class="phase-badge evil">PHASE 2: THE QUEST</div>
             <h2 class="title" style="font-size: 2.5rem; margin-bottom: 0.5rem;">THE QUEST</h2>
             <div id="quest-modal-team" class="modal-team-display" style="margin-bottom: 1.5rem;"></div>
-            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);"><strong>Secret Vote:</strong> Choose the outcome of the mission.</p>
+            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);"><strong>Secret Vote:</strong> Choose the
+                outcome of the mission.</p>
             <div class="vote-buttons">
                 <button id="btn-quest-success" class="btn approve">SUCCESS</button>
                 <button id="btn-quest-fail" class="btn reject">FAIL</button>
             </div>
         </div>
+
+        <div id="instructions-modal" class="modal glass-panel hidden" style="max-width: 600px; text-align: left;">
+            <h3 style="text-align: center; color: var(--accent-gold);">HOW TO PLAY</h3>
+            <div style="font-size: 0.9rem; line-height: 1.4; max-height: 70vh; overflow-y: auto;">
+                <p><strong>Goal:</strong> Good wins after 3 successful quests. Evil wins after 3 failed quests or if
+                    they assassinate Merlin.</p>
+                <hr style="margin: 1rem 0; opacity: 0.2">
+                <p><strong>Roles:</strong></p>
+                <ul>
+                    <li><strong>Merlin:</strong> Knows the evil players (except Mordred).</li>
+                    <li><strong>Percival:</strong> Knows Merlin and Morgana (as they appear to him).</li>
+                    <li><strong>Assassin:</strong> If Good wins, he gets one chance to pick Merlin and win for Evil.
+                    </li>
+                    <li><strong>Morgana:</strong> Appears as Merlin to Percival.</li>
+                </ul>
+                <hr style="margin: 1rem 0; opacity: 0.2">
+                <p><strong>Gameplay:</strong></p>
+                <ol>
+                    <li>The <strong>Leader</strong> proposes a team for a Quest.</li>
+                    <li>Everyone <strong>Votes</strong> to Approve or Reject the team.</li>
+                    <li>If approved, the team members <strong>secretly vote</strong> to Success or Fail.</li>
+                </ol>
+            </div>
+            <button id="btn-close-instructions" class="btn secondary"
+                style="width: 100%; margin-top: 1rem;">CLOSE</button>
+        </div>
     </div>
 
-    <div id="identity-modal" class="modal-overlay hidden">
-        <div class="modal glass-panel">
-            <h2 class="phase-badge" id="identity-header-team">YOUR IDENTITY</h2>
-            <h1 id="identity-role-name" class="subtitle" style="font-size: 3rem; margin-bottom: 0.5rem;">Role</h1>
-            <p id="identity-role-desc" style="font-style: italic; color: var(--text-secondary); margin-bottom: 2rem;">Description</p>
-            <div id="identity-knowledge" class="knowledge-box glass-panel" style="background: rgba(0,0,0,0.2); padding: 1.5rem;"></div>
-            <button id="btn-close-identity" class="btn secondary" style="margin-top: 2rem;">Return to Game</button>
+    <!-- Role Reminder & Rules Link (Bottom Right) -->
+    <div id="game-footer" class="game-footer hidden">
+        <div id="role-reminder" class="role-badge" data-tooltip="Click for Identity Details">
+            <span class="label">YOUR ROLE</span>
+            <span id="reminder-role-name" class="name">?</span>
         </div>
+        <button id="btn-view-rules" class="btn-icon" title="How to Play">📜 Rules</button>
     </div>
 
     <div id="instructions-modal" class="modal-overlay hidden">
@@ -201,4 +240,5 @@
 
     <script type="module" src="js/app.js"></script>
 </body>
+
 </html>

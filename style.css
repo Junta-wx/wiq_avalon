@@ -24,8 +24,8 @@
 
 body {
     background-color: var(--bg-color);
-    background-image: 
-        radial-gradient(circle at 50% 50%, rgba(30,30,50,0.4) 0%, rgba(13,13,18,0.9) 100%),
+    background-image:
+        radial-gradient(circle at 50% 50%, rgba(30, 30, 50, 0.4) 0%, rgba(13, 13, 18, 0.9) 100%),
         url('assets/background.png');
     background-size: cover;
     background-position: center;
@@ -63,8 +63,15 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Typography */
@@ -96,7 +103,9 @@ body {
     width: 100%;
 }
 
-.main-menu, #auth-screen .glass-panel, #room-screen .glass-panel {
+.main-menu,
+#auth-screen .glass-panel,
+#room-screen .glass-panel {
     max-width: 500px;
     margin: 0 auto;
 }
@@ -140,8 +149,15 @@ body {
     background: rgba(212, 175, 55, 0.1);
 }
 
-.approve { background: var(--good-color); color: white; }
-.reject { background: var(--evil-color); color: white; }
+.approve {
+    background: var(--good-color);
+    color: white;
+}
+
+.reject {
+    background: var(--evil-color);
+    color: white;
+}
 
 /* Form Elements */
 input[type="text"] {
@@ -243,7 +259,8 @@ input[type="text"]:focus {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    flex-shrink: 0; /* NO SHRANK ALLOWED */
+    flex-shrink: 0;
+    /* NO SHRANK ALLOWED */
 }
 
 /* Tooltip System */
@@ -270,7 +287,7 @@ input[type="text"]:focus {
     visibility: hidden;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 2000;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     pointer-events: none;
     text-shadow: none;
 }
@@ -294,7 +311,8 @@ input[type="text"]:focus {
 .vote-node {
     width: 24px;
     height: 24px;
-    flex-shrink: 0; /* Fixed circle */
+    flex-shrink: 0;
+    /* Fixed circle */
     aspect-ratio: 1/1;
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -303,7 +321,7 @@ input[type="text"]:focus {
     justify-content: center;
     font-size: 0.7rem;
     font-weight: bold;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0, 0, 0, 0.3);
     transition: all 0.5s ease;
 }
 
@@ -322,14 +340,16 @@ input[type="text"]:focus {
 .vote-narrative {
     font-size: 0.85rem;
     font-style: italic;
-    color: white; /* Brighter for readability */
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    color: white;
+    /* Brighter for readability */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     text-align: center;
     min-height: 2.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(212, 175, 55, 0.05); /* Very subtle gold tint */
+    background: rgba(212, 175, 55, 0.05);
+    /* Very subtle gold tint */
     border-radius: 4px;
     padding: 0 0.5rem;
     transition: all 0.3s ease;
@@ -364,8 +384,17 @@ input[type="text"]:focus {
 }
 
 @keyframes nodePulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.1); opacity: 0.8; }
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
 }
 
 .quest-node {
@@ -388,11 +417,25 @@ input[type="text"]:focus {
     box-shadow: 0 0 10px var(--accent-gold-glow);
 }
 
-.quest-node.success { background: var(--good-color); border-color: transparent; }
-.quest-node.fail { background: var(--evil-color); border-color: transparent; }
+.quest-node.success {
+    background: var(--good-color);
+    border-color: transparent;
+}
 
-.quest-size { font-size: 1.2rem; font-weight: bold; }
-.quest-req { font-size: 0.7rem; color: var(--text-secondary); }
+.quest-node.fail {
+    background: var(--evil-color);
+    border-color: transparent;
+}
+
+.quest-size {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.quest-req {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
 
 .player-board {
     display: grid;
@@ -442,7 +485,7 @@ input[type="text"]:focus {
     font-weight: bold;
     padding: 2px 8px;
     border-radius: 4px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     z-index: 10;
 }
 
@@ -465,7 +508,8 @@ input[type="text"]:focus {
     transform: rotateY(180deg);
 }
 
-.card-front, .card-back {
+.card-front,
+.card-back {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -492,10 +536,23 @@ input[type="text"]:focus {
     transform: rotateY(180deg);
 }
 
-.card-back.merlin { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/merlin.png'); }
-.card-back.assassin { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/assassin.png'); }
-.card-back.good { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/servant.png'); background-size: cover; }
-.card-back.evil { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/minion.png'); background-size: cover; }
+.card-back.merlin {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/merlin.png');
+}
+
+.card-back.assassin {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/assassin.png');
+}
+
+.card-back.good {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/servant.png');
+    background-size: cover;
+}
+
+.card-back.evil {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/minion.png');
+    background-size: cover;
+}
 
 .loyalty-tag {
     font-family: var(--font-heading);
@@ -506,16 +563,31 @@ input[type="text"]:focus {
     letter-spacing: 2px;
     font-weight: bold;
 }
-.loyalty-tag.good { background: #3498db; color: white; }
-.loyalty-tag.evil { background: #e74c3c; color: white; }
+
+.loyalty-tag.good {
+    background: #3498db;
+    color: white;
+}
+
+.loyalty-tag.evil {
+    background: #e74c3c;
+    color: white;
+}
 
 .crown-icon {
     animation: bounce 2s infinite ease-in-out;
 }
 
 @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
 }
 
 /* Knowledge Box */
@@ -546,7 +618,8 @@ input[type="text"]:focus {
     pointer-events: none;
 }
 
-.modal-overlay.active, .modal-overlay:not(.hidden) {
+.modal-overlay.active,
+.modal-overlay:not(.hidden) {
     pointer-events: auto;
 }
 
@@ -568,9 +641,23 @@ input[type="text"]:focus {
     margin: 1.5rem 0;
 }
 
-.rules-scroll h3 { color: var(--accent-gold); font-size: 1rem; margin: 1rem 0 0.5rem 0; }
-.rules-scroll p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
-.rules-scroll ul { padding-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem; }
+.rules-scroll h3 {
+    color: var(--accent-gold);
+    font-size: 1rem;
+    margin: 1rem 0 0.5rem 0;
+}
+
+.rules-scroll p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.rules-scroll ul {
+    padding-left: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
 
 /* Game Footer & Role Badge */
 .game-footer {
@@ -597,16 +684,30 @@ input[type="text"]:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
-    cursor: pointer;
 }
 
-.role-badge .label { font-size: 0.6rem; letter-spacing: 2px; opacity: 0.6; }
-.role-badge .name { font-family: var(--font-heading); font-weight: bold; font-size: 1.1rem; color: var(--accent-gold); }
+.role-badge .label {
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    opacity: 0.6;
+}
 
-.role-badge.good { border-color: #3498db; }
-.role-badge.evil { border-color: #e74c3c; }
+.role-badge .name {
+    font-family: var(--font-heading);
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--accent-gold);
+}
+
+.role-badge.good {
+    border-color: #3498db;
+}
+
+.role-badge.evil {
+    border-color: #e74c3c;
+}
 
 .btn-icon {
     background: rgba(255, 255, 255, 0.1);
@@ -619,14 +720,25 @@ input[type="text"]:focus {
     transition: all 0.3s ease;
 }
 
-.btn-icon:hover { background: rgba(255, 255, 255, 0.2); }
-
-@keyframes modalPop {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+.btn-icon:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 
-.hidden { display: none !important; }
+@keyframes modalPop {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
 
 /* Notifications */
 .notification {
@@ -640,37 +752,46 @@ input[type="text"]:focus {
     border-radius: 30px;
     font-weight: bold;
     z-index: 3000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     pointer-events: none;
 }
 
 .local-identity {
     position: fixed;
     top: 1rem;
-    right: 0;
+    right: 2rem;
     background: var(--panel-color);
     backdrop-filter: blur(8px);
     border: 1px solid var(--accent-gold);
-    border-right: none;
-    padding: 0.5rem 1rem 0.5rem 1.5rem;
-    border-radius: 20px 0 0 20px;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
     font-size: 0.9rem;
     color: var(--accent-gold);
     display: flex;
     gap: 0.5rem;
-    z-index: 2500;
-    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+    z-index: 1500;
+    /* Above modals (1000) */
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
     animation: identityPulse 4s infinite;
     pointer-events: none;
 }
 
-.local-identity *, .notification * {
+.local-identity *,
+.notification * {
     pointer-events: auto;
 }
 
 @keyframes identityPulse {
-    0%, 100% { border-color: rgba(212, 175, 55, 0.3); }
-    50% { border-color: var(--accent-gold); box-shadow: 0 0 15px var(--accent-gold-glow); }
+
+    0%,
+    100% {
+        border-color: rgba(212, 175, 55, 0.3);
+    }
+
+    50% {
+        border-color: var(--accent-gold);
+        box-shadow: 0 0 15px var(--accent-gold-glow);
+    }
 }
 
 
