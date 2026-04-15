@@ -223,8 +223,12 @@ class AvalonApp {
         console.log('Rendering state:', state);
         
         // Auto-switch screens based on phase
-        if (state.phase === PHASES.LOBBY) this.showScreen('lobby');
-        else if (state.players.every(p => !p.role)) this.showScreen('room');
+        if (state.phase === PHASES.LOBBY) {
+            // If we have players, we are in the Waiting Room. 
+            // If no players, we are still on the Main Menu.
+            if (state.players.length > 0) this.showScreen('room');
+            else this.showScreen('lobby');
+        }
         else if (state.phase === PHASES.ROLES) this.renderRoleReveal(state);
         else if (state.phase === PHASES.END) this.renderEnd(state);
         else this.renderGame(state);
