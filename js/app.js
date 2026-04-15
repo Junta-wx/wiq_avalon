@@ -335,11 +335,15 @@ class AvalonApp {
             if (isCurrent) cls += ' active';
             if (state.questHistory[i] === 'success') cls += ' success';
             if (state.questHistory[i] === 'fail') cls += ' fail';
-            const double = config.doubleFailRequired && i === 3 ? '*' : '';
+            const double = config.doubleFailRequired && i === 3;
+            const doubleSign = double ? '*' : '';
+            
+            const tooltipText = `Mission ${i+1}: ${q} Players needed. ${double ? 'REQUIRES 2 FAILS TO SABOTAGE.' : '1 Fail required to sabotage.'}`;
+
             return `
-                <div class="quest-container ${isCurrent ? 'active' : ''}">
+                <div class="quest-container ${isCurrent ? 'active' : ''}" data-tooltip="${tooltipText}">
                     <span class="quest-label">Q${i+1}${isCurrent ? ' <small>(Current)</small>' : ''}</span>
-                    <div class="${cls}"><span class="quest-size">${q}${double}</span></div>
+                    <div class="${cls}"><span class="quest-size">${q}${doubleSign}</span></div>
                 </div>
             `;
         }).join('');

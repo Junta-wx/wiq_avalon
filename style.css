@@ -189,9 +189,9 @@ input[type="text"]:focus {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    margin-bottom: 2rem;
-    padding: 1rem;
-    gap: 2rem;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem 2rem;
+    gap: 1rem;
 }
 
 .header-section {
@@ -199,26 +199,68 @@ input[type="text"]:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.8rem;
+    gap: 1rem;
+    position: relative;
 }
 
 .section-label {
-    font-size: 0.65rem;
-    letter-spacing: 3px;
-    color: var(--text-secondary);
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    color: var(--accent-gold);
     margin: 0;
-    font-weight: bold;
+    font-weight: 800;
     text-transform: uppercase;
+    opacity: 0.9;
 }
 
 .quest-track {
     display: flex;
-    gap: 1.2rem;
+    gap: 1.8rem;
+}
+
+/* Tooltip System */
+[data-tooltip] {
+    position: relative;
+    cursor: help;
+}
+
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: rgba(20, 20, 30, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--accent-gold-glow);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 2000;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    pointer-events: none;
+    text-shadow: none;
+}
+
+[data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.vote-panel {
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    padding-left: 2.5rem;
 }
 
 .vote-track {
     display: flex;
-    gap: 0.8rem;
+    gap: 1.2rem;
 }
 
 .vote-node {
