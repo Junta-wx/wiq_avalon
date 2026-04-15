@@ -617,7 +617,7 @@ input[type="text"]:focus {
 
 /* Notifications */
 .notification {
-    position: absolute;
+    position: fixed;
     top: 2rem;
     left: 50%;
     transform: translateX(-50%);
@@ -626,12 +626,12 @@ input[type="text"]:focus {
     color: black;
     border-radius: 30px;
     font-weight: bold;
-    z-index: 2000;
+    z-index: 3000;
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
 .local-identity {
-    position: absolute;
+    position: fixed;
     top: 1rem;
     right: 0;
     background: var(--panel-color);
@@ -644,7 +644,7 @@ input[type="text"]:focus {
     color: var(--accent-gold);
     display: flex;
     gap: 0.5rem;
-    z-index: 1500;
+    z-index: 2500;
     box-shadow: -5px 0 15px rgba(0,0,0,0.3);
     animation: identityPulse 4s infinite;
 }

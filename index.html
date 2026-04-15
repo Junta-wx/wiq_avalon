@@ -12,14 +12,13 @@
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
 </head>
 <body>
-    <div id="app" class="app-container">
-        <!-- Notification Overlay -->
-        <div id="notification" class="notification hidden"></div>
+    <!-- Persistent Overlays (Screen-Relative) -->
+    <div id="notification" class="notification hidden"></div>
+    <div id="local-identity" class="local-identity hidden">
+        <span class="label">ID:</span> <span id="display-local-name">-</span>
+    </div>
 
-        <!-- Persistent Identity -->
-        <div id="local-identity" class="local-identity hidden">
-            <span class="label">ID:</span> <span id="display-local-name">-</span>
-        </div>
+    <div id="app" class="app-container">
 
         <!-- Lobby Phase -->
         <section id="lobby-screen" class="screen active">
@@ -172,29 +171,6 @@
             </div>
         </div>
 
-        <div id="instructions-modal" class="modal glass-panel hidden" style="max-width: 600px; text-align: left;">
-            <h3 style="text-align: center; color: var(--accent-gold);">HOW TO PLAY</h3>
-            <div style="font-size: 0.9rem; line-height: 1.4; max-height: 70vh; overflow-y: auto;">
-                <p><strong>Goal:</strong> Good wins after 3 successful quests. Evil wins after 3 failed quests or if they assassinate Merlin.</p>
-                <hr style="margin: 1rem 0; opacity: 0.2">
-                <p><strong>Roles:</strong></p>
-                <ul>
-                    <li><strong>Merlin:</strong> Knows the evil players (except Mordred).</li>
-                    <li><strong>Percival:</strong> Knows Merlin and Morgana (as they appear to him).</li>
-                    <li><strong>Assassin:</strong> If Good wins, he gets one chance to pick Merlin and win for Evil.</li>
-                    <li><strong>Morgana:</strong> Appears as Merlin to Percival.</li>
-                </ul>
-                <hr style="margin: 1rem 0; opacity: 0.2">
-                <p><strong>Gameplay:</strong></p>
-                <ol>
-                    <li>The <strong>Leader</strong> proposes a team for a Quest.</li>
-                    <li>Everyone <strong>Votes</strong> to Approve or Reject the team.</li>
-                    <li>If approved, the team members <strong>secretly vote</strong> to Success or Fail.</li>
-                </ol>
-            </div>
-            <button id="btn-close-instructions" class="btn secondary" style="width: 100%; margin-top: 1rem;">CLOSE</button>
-        </div>
-    </div>
 
     <!-- Role Reminder & Rules Link (Bottom Right) -->
     <div id="game-footer" class="game-footer hidden">
