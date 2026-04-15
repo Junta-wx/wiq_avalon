@@ -44,7 +44,11 @@ class AvalonApp {
         document.getElementById('btn-close-instructions').onclick = () => this.hideModal();
 
         // Room
-        document.getElementById('btn-start-game').onclick = () => this.startGame();
+        const startBtn = document.getElementById('btn-start-game');
+        startBtn.addEventListener('click', () => {
+            console.log('Start button physically clicked');
+            this.startGame();
+        });
 
         // Role
         document.getElementById('role-card').onclick = (e) => {
@@ -145,19 +149,41 @@ class AvalonApp {
     }
 
     startGame() {
-        const count = this.game.state.players.length;
-        if (count < 5) return this.notify('Need at least 5 players');
-        
-        const settings = {
-            percival: document.getElementById('role-percival').checked,
-            morgana: document.getElementById('role-morgana').checked,
-            mordred: document.getElementById('role-mordred').checked,
-            oberon: document.getElementById('role-oberon').checked
-        };
-        
-        const roles = getInitialRoles(count, settings);
-        this.game.startGame(roles);
-        this.network.broadcast(this.game.state);
+        try {
+            const count = this.game.state.players.length;
+            console.log('Attempting to start game with', count, 'players');
+            
+            if (count < 2) {
+                this.notify('Need at least 2 players to start');
+                return;
+            }
+            
+            const settings = {
+                percival: document.getElementById('role-percival').checked,
+                morgana: document.getElementById('role-morgana').checked,
+                mordred: document.getElementById('role-mordred').checked,
+                oberon: document.getElementById('role-oberon').checked
+            };
+            
+            let roles = getInitialRoles(count, settings);
+            
+            if (!roles) {
+                this.notify('Critical Error: Could not generate roles');
+                return;
+            }
+
+            // Ensure we only have as many roles as players
+            if (roles.length > count) {
+                roles = roles.slice(0, count);
+            }
+
+            this.game.startGame(roles);
+            this.network.broadcast(this.game.state);
+            this.notify('Game Started!');
+        } catch (err) {
+            console.error('Start Game Error:', err);
+            this.notify('Error: ' + err.message);
+        }
     }
 
     submitVote(approve) {
@@ -183,7 +209,7 @@ class AvalonApp {
     }
 
     render(state) {
-        console.log('Rendering state:', state);
+        console.log('Rendering phase:', state.phase, 'Players:', state.players.length, 'isHost:', this.network.isHost);
         
         // Auto-switch screens based on phase
         if (state.phase === PHASES.LOBBY) {

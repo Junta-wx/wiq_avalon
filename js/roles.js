@@ -26,6 +26,9 @@ export const ROLES = {
 };
 
 export const GAME_CONFIGS = {
+    2: { good: 1, evil: 1, quests: [1, 2, 1, 2, 1] },
+    3: { good: 2, evil: 1, quests: [2, 2, 2, 2, 2] },
+    4: { good: 2, evil: 2, quests: [2, 3, 2, 3, 3] },
     5: { good: 3, evil: 2, quests: [2, 3, 2, 3, 3] },
     6: { good: 4, evil: 2, quests: [2, 3, 4, 3, 4] },
     7: { good: 4, evil: 3, quests: [2, 3, 3, 4, 4], doubleFailRequired: true },
