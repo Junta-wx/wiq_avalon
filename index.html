@@ -99,7 +99,13 @@
         <!-- Main Game Phase -->
         <section id="game-screen" class="screen">
             <div class="game-header">
-                <div class="quest-track" id="quest-track"></div>
+                <div class="header-left">
+                    <div class="quest-track" id="quest-track"></div>
+                    <div class="quest-legend">
+                        <span><strong>#</strong>: Players Needed</span> | 
+                        <span><strong>*</strong>: 2 Fails Required</span>
+                    </div>
+                </div>
                 <div class="fail-track">
                     Rejections: <span id="rejection-count">0</span>/5
                 </div>
@@ -138,8 +144,9 @@
     <!-- Modals -->
     <div id="modal-overlay" class="modal-overlay hidden">
         <div id="vote-modal" class="modal glass-panel hidden">
-            <h2 class="title" style="font-size: 2rem; margin-bottom: 0.5rem;">APPROVE TEAM?</h2>
-            <div id="modal-team-list" class="glass-panel" style="margin-bottom: 1rem; padding: 1rem; border-color: var(--accent-gold);">
+            <div class="phase-badge">PHASE 1: TEAM APPROVAL</div>
+            <h2 class="title" style="font-size: 2.5rem; margin-bottom: 0.5rem;">APPROVE TEAM?</h2>
+            <div id="modal-team-list" class="modal-team-display">
                 <!-- Team names injected here -->
             </div>
             <p style="margin-bottom: 1rem; color: var(--text-secondary);">Do you want the players listed above to go on the Quest?</p>
@@ -153,7 +160,11 @@
         </div>
 
         <div id="quest-modal" class="modal glass-panel hidden">
-            <h2 class="title" style="font-size: 2rem; margin-bottom: 0.5rem;">THE QUEST</h2>
+            <div class="phase-badge evil">PHASE 2: THE QUEST</div>
+            <h2 class="title" style="font-size: 2.5rem; margin-bottom: 0.5rem;">THE QUEST</h2>
+            <div id="quest-modal-team" class="modal-team-display" style="margin-bottom: 1.5rem;">
+                <!-- Re-use or separate team display -->
+            </div>
             <p style="margin-bottom: 1.5rem; color: var(--text-secondary);"><strong>Secret Vote:</strong> Choose the outcome of the mission.<br><small>(Evil players can choose to Fail to sabotage the quest)</small></p>
             <div class="vote-buttons">
                 <button id="btn-quest-success" class="btn approve">SUCCESS</button>

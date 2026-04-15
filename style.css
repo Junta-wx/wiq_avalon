@@ -188,18 +188,38 @@ input[type="text"]:focus {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 2rem;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .quest-track {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
+}
+
+.quest-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quest-label {
+    font-size: 0.7rem;
+    color: var(--accent-gold);
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .quest-node {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: 2px solid rgba(255, 255, 255, 0.2);
     display: flex;
@@ -420,7 +440,42 @@ input[type="text"]:focus {
     50% { border-color: var(--accent-gold); box-shadow: 0 0 15px var(--accent-gold-glow); }
 }
 
-.local-identity .label {
-    opacity: 0.6;
+.quest-legend {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.quest-legend strong {
+    color: var(--accent-gold);
+}
+
+.phase-badge {
+    display: inline-block;
+    background: var(--accent-gold);
+    color: black;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 3px 12px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+}
+
+.phase-badge.evil {
+    background: var(--accent-crimson);
     color: white;
+}
+
+.modal-team-display {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
 }

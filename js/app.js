@@ -336,7 +336,12 @@ class AvalonApp {
             if (state.questHistory[i] === 'success') cls += ' success';
             if (state.questHistory[i] === 'fail') cls += ' fail';
             const double = config.doubleFailRequired && i === 3 ? '*' : '';
-            return `<div class="${cls}"><span class="quest-size">${q}${double}</span></div>`;
+            return `
+                <div class="quest-container">
+                    <span class="quest-label">Q${i+1}</span>
+                    <div class="${cls}"><span class="quest-size">${q}${double}</span></div>
+                </div>
+            `;
         }).join('');
 
         // Phase info
@@ -367,17 +372,25 @@ class AvalonApp {
             const teamNames = state.selectedTeam.map(id => state.players.find(p => p.id === id).name);
             instruction.innerText = `Everyone: Do you approve of this team: ${teamNames.join(', ')}?`;
             
+            // Force update Modal Team List
+            const teamListEl = document.getElementById('modal-team-list');
+            teamListEl.innerHTML = teamNames.map(name => `<div style="font-weight: bold; padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.05)">👤 ${name}</div>`).join('');
+
             if (state.votes[this.network.playerId] === undefined) {
-                const teamListEl = document.getElementById('modal-team-list');
-                teamListEl.innerHTML = teamNames.map(name => `<div style="font-weight: bold; padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.1)">👤 ${name}</div>`).join('');
-                
                 document.getElementById('modal-overlay').classList.remove('hidden');
                 document.getElementById('vote-modal').classList.remove('hidden');
             }
         } else if (state.phase === PHASES.QUEST) {
             context.innerText = 'PHASE 2: THE QUEST';
             title.innerText = 'SECRET VOTE';
+            const teamNames = state.selectedTeam.map(id => state.players.find(p => p.id === id).name);
             instruction.innerText = `The chosen team is on the quest! Waiting for their secret success/fail results...`;
+            
+            // Force update Quest Modal Team
+            const questTeamEl = document.getElementById('quest-modal-team');
+            questTeamEl.innerHTML = `<span style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 0.5rem">ON THE QUEST:</span>` + 
+                teamNames.map(name => `<div style="font-weight: bold; padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.05)">👤 ${name}</div>`).join('');
+
             const isOnTeam = state.selectedTeam.includes(this.network.playerId);
             if (isOnTeam && !this.localQuestVoted) {
                 document.getElementById('modal-overlay').classList.remove('hidden');
