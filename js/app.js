@@ -327,8 +327,7 @@ class AvalonApp {
         const config = GAME_CONFIGS[state.players.length];
         const questSize = config.quests[state.questHistory.length];
 
-        // Header info
-        document.getElementById('rejection-count').innerText = state.rejections;
+        // 1. Quest Track (Fate Panel)
         const track = document.getElementById('quest-track');
         track.innerHTML = config.quests.map((q, i) => {
             let cls = 'quest-node';
@@ -344,7 +343,30 @@ class AvalonApp {
             `;
         }).join('');
 
-        // Phase info
+        // 2. Vote Track (Discord Panel)
+        const voteTrack = document.getElementById('vote-track');
+        const narratives = [
+            "King Arthur's court is in harmony.",
+            "The first seeds of doubt are sown...",
+            "Whispers of treason echo in the halls.",
+            "Discord spreads! The Knights are divided.",
+            "THE BRINK OF DESPAIR! The next failure is fatal.",
+            "CHAOS REIGNS. Evil has triumphed through discord."
+        ];
+        
+        voteTrack.innerHTML = [1, 2, 3, 4, 5].map(i => {
+            let cls = 'vote-node';
+            if (i <= state.rejections) cls += ' active';
+            if (i === 5) cls += ' evil-win';
+            return `<div class="${cls}">${i}</div>`;
+        }).join('');
+        
+        const narrativeEl = document.getElementById('vote-narrative');
+        narrativeEl.innerText = narratives[state.rejections];
+        if (state.rejections >= 4) narrativeEl.style.color = 'var(--accent-crimson)';
+        else narrativeEl.style.color = 'var(--text-secondary)';
+
+        // 3. Phase info
         const context = document.getElementById('phase-context');
         const title = document.getElementById('phase-title');
         const instruction = document.getElementById('phase-instruction');

@@ -98,16 +98,25 @@
 
         <!-- Main Game Phase -->
         <section id="game-screen" class="screen">
-            <div class="game-header">
-                <div class="header-left">
+            <div class="game-header glass-panel">
+                <!-- Quest Fate Panel -->
+                <div class="header-section quest-panel">
+                    <h5 class="section-label">GRAIL QUESTS</h5>
                     <div class="quest-track" id="quest-track"></div>
                     <div class="quest-legend">
-                        <span><strong>#</strong>: Players Needed</span> | 
-                        <span><strong>*</strong>: 2 Fails Required</span>
+                        <span><strong>#</strong> Req Players</span> | <span><strong>*</strong> needs 2 Fails</span>
                     </div>
                 </div>
-                <div class="fail-track">
-                    Rejections: <span id="rejection-count">0</span>/5
+
+                <!-- Vote Track / Discord Panel -->
+                <div class="header-section vote-panel">
+                    <h5 class="section-label">DISCORD TRACK</h5>
+                    <div class="vote-track" id="vote-track">
+                        <!-- 5 nodes will be injected here -->
+                    </div>
+                    <div id="vote-narrative" class="vote-narrative">
+                        The Kingdom is in harmony.
+                    </div>
                 </div>
             </div>
 

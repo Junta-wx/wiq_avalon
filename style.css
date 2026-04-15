@@ -188,38 +188,82 @@ input[type="text"]:focus {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: stretch;
     margin-bottom: 2rem;
+    padding: 1rem;
+    gap: 2rem;
 }
 
-.header-left {
+.header-section {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.section-label {
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    color: var(--text-secondary);
+    margin: 0;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .quest-track {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.2rem;
 }
 
-.quest-container {
+.vote-track {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+    gap: 0.8rem;
 }
 
-.quest-label {
+.vote-node {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0.7rem;
-    color: var(--accent-gold);
     font-weight: bold;
-    letter-spacing: 1px;
+    background: rgba(0,0,0,0.3);
+    transition: all 0.5s ease;
+}
+
+.vote-node.active {
+    background: var(--accent-crimson);
+    border-color: var(--accent-crimson);
+    box-shadow: 0 0 10px var(--accent-crimson);
+    animation: nodePulse 2s infinite;
+}
+
+.vote-node.evil-win {
+    border-color: var(--accent-crimson);
+    color: var(--accent-crimson);
+}
+
+.vote-narrative {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    text-align: center;
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes nodePulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
 }
 
 .quest-node {
-    width: 50px;
-    height: 50px;
     border-radius: 50%;
     border: 2px solid rgba(255, 255, 255, 0.2);
     display: flex;
