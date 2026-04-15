@@ -41,6 +41,23 @@ class AvalonApp {
             document.getElementById('instructions-modal').classList.remove('hidden');
         };
 
+        // Network Init
+        try {
+            // Add a 5 second timeout to network init for better UX
+            const timeout = new Promise((_, reject) => 
+                setTimeout(() => reject(new Error('Network Timeout')), 5000)
+            );
+            await Promise.race([this.network.init(), timeout]);
+            console.log('Network initialized successfully');
+        } catch (err) {
+            console.error('Network initialization failed or timed out:', err);
+            this.notify('Network slow or unavailable. You can still try to create a room.');
+        } finally {
+            this.btnCreate.disabled = false;
+            this.btnJoin.disabled = false;
+            this.btnCreate.innerText = 'Create New Room';
+        }
+
         document.getElementById('btn-close-instructions').onclick = () => {
             document.getElementById('instructions-modal').classList.add('hidden');
         };

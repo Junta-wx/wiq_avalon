@@ -12,9 +12,7 @@
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
 </head>
 <body>
-
     <div id="app" class="app-container">
-
         <!-- Lobby Phase -->
         <section id="lobby-screen" class="screen active">
             <h1 class="title">AVALON</h1>
@@ -87,18 +85,14 @@
         <!-- Main Game Phase -->
         <section id="game-screen" class="screen">
             <div class="game-header glass-panel">
-                <!-- Quest Fate Panel -->
                 <div class="header-section quest-panel">
                     <h5 class="section-label">GRAIL QUESTS</h5>
                     <div class="quest-track" id="quest-track"></div>
                 </div>
 
-                <!-- Vote Track / Discord Panel -->
                 <div class="header-section vote-panel">
                     <h5 class="section-label">DISCORD TRACK</h5>
-                    <div class="vote-track" id="vote-track">
-                        <!-- 5 nodes will be injected here -->
-                    </div>
+                    <div class="vote-track" id="vote-track"></div>
                     <div id="vote-narrative" class="vote-narrative">
                         The Kingdom is in harmony.
                     </div>
@@ -135,14 +129,12 @@
         </section>
     </div>
 
-    <!-- Modals -->
+    <!-- Modals (Global Siblings) -->
     <div id="modal-overlay" class="modal-overlay hidden">
         <div id="vote-modal" class="modal glass-panel hidden">
             <div class="phase-badge">PHASE 1: TEAM APPROVAL</div>
             <h2 class="title" style="font-size: 2.5rem; margin-bottom: 0.5rem;">APPROVE TEAM?</h2>
-            <div id="modal-team-list" class="modal-team-display">
-                <!-- Team names injected here -->
-            </div>
+            <div id="modal-team-list" class="modal-team-display"></div>
             <p style="margin-bottom: 1rem; color: var(--text-secondary);">Do you want the players listed above to go on the Quest?</p>
             <p style="margin-bottom: 1.5rem; font-size: 0.8rem; color: var(--accent-gold); opacity: 0.8;">
                 ⚠️ 5 consecutive rejections allow EVIL to seize victory automatically!
@@ -156,68 +148,55 @@
         <div id="quest-modal" class="modal glass-panel hidden">
             <div class="phase-badge evil">PHASE 2: THE QUEST</div>
             <h2 class="title" style="font-size: 2.5rem; margin-bottom: 0.5rem;">THE QUEST</h2>
-            <div id="quest-modal-team" class="modal-team-display" style="margin-bottom: 1.5rem;">
-                <!-- Re-use or separate team display -->
-            </div>
-            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);"><strong>Secret Vote:</strong> Choose the outcome of the mission.<br><small>(Evil players can choose to Fail to sabotage the quest)</small></p>
+            <div id="quest-modal-team" class="modal-team-display" style="margin-bottom: 1.5rem;"></div>
+            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);"><strong>Secret Vote:</strong> Choose the outcome of the mission.</p>
             <div class="vote-buttons">
                 <button id="btn-quest-success" class="btn approve">SUCCESS</button>
                 <button id="btn-quest-fail" class="btn reject">FAIL</button>
             </div>
         </div>
-
-
-    <!-- Role Reminder & Rules Link (Bottom Right) -->
-    <div id="game-footer" class="game-footer hidden">
-        <div id="role-reminder" class="role-badge" title="Click for Identity Details">
-            <span class="label">YOUR ROLE</span>
-            <span id="reminder-role-name" class="name">?</span>
-        </div>
-        <button id="btn-view-rules" class="btn-icon" title="How to Play">📜 Rules</button>
     </div>
 
-    <!-- Identity Modal -->
     <div id="identity-modal" class="modal-overlay hidden">
         <div class="modal glass-panel">
             <h2 class="phase-badge" id="identity-header-team">YOUR IDENTITY</h2>
             <h1 id="identity-role-name" class="subtitle" style="font-size: 3rem; margin-bottom: 0.5rem;">Role</h1>
             <p id="identity-role-desc" style="font-style: italic; color: var(--text-secondary); margin-bottom: 2rem;">Description</p>
-            <div id="identity-knowledge" class="knowledge-box glass-panel" style="background: rgba(0,0,0,0.2); padding: 1.5rem;">
-                <!-- Knowledge entries here -->
-            </div>
+            <div id="identity-knowledge" class="knowledge-box glass-panel" style="background: rgba(0,0,0,0.2); padding: 1.5rem;"></div>
             <button id="btn-close-identity" class="btn secondary" style="margin-top: 2rem;">Return to Game</button>
         </div>
     </div>
 
-    <!-- Instructions / Rules Modal -->
     <div id="instructions-modal" class="modal-overlay hidden">
         <div class="modal glass-panel instructions-content">
             <h2 class="subtitle">Avalon: Quick Guide</h2>
             <div class="rules-scroll">
                 <h3>The Goal</h3>
-                <p><strong>Good</strong> wins if 3 Quests succeed. <strong>Evil</strong> wins if 3 Quests fail, or if the Assassin identifies Merlin at the end.</p>
-                
+                <p><strong>Good</strong> wins if 3 Quests succeed. <strong>Evil</strong> wins if 3 Quests fail.</p>
                 <h3>Phase 1: Team Building</h3>
-                <p>The Leader proposes a team. EVERYONE votes. If rejected 5 times in a row, Evil wins automatically.</p>
-                
-                <h3>Phase 2: The Quest</h3>
-                <p>Chosen players vote SUCCESS or FAIL. Good MUST Success. Evil can choose to Success (to hide) or Fail (to sabotage).</p>
-
+                <p>The Leader proposes a team. EVERYONE votes.</p>
                 <h3>Characters</h3>
                 <ul>
-                    <li><strong>Merlin:</strong> Knows who is Evil. Must remain hidden.</li>
-                    <li><strong>Assassin:</strong> If Evil loses, identifies Merlin to steal the win.</li>
-                    <li><strong>Servants/Minions:</strong> The backbone of each team.</li>
+                    <li><strong>Merlin:</strong> Knows who is Evil.</li>
+                    <li><strong>Assassin:</strong> Identifies Merlin to steal the win.</li>
                 </ul>
             </div>
             <button id="btn-close-rules" class="btn secondary">Back to Game</button>
         </div>
     </div>
 
-    <!-- Persistent Overlays (Screen-Relative) -->
+    <!-- UI Overlays -->
     <div id="notification" class="notification hidden"></div>
     <div id="local-identity" class="local-identity hidden">
         <span class="label">ID:</span> <span id="display-local-name">-</span>
+    </div>
+
+    <div id="game-footer" class="game-footer hidden">
+        <div id="role-reminder" class="role-badge" title="Click for Identity Details">
+            <span class="label">YOUR ROLE</span>
+            <span id="reminder-role-name" class="name">?</span>
+        </div>
+        <button id="btn-view-rules" class="btn-icon" title="How to Play">📜 Rules</button>
     </div>
 
     <script type="module" src="js/app.js"></script>

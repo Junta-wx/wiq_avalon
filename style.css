@@ -32,17 +32,19 @@ body {
     background-repeat: no-repeat;
     color: var(--text-primary);
     font-family: var(--font-body);
-    min-height: 100vh;
-    overflow-x: hidden;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .app-container {
     width: 100%;
     max-width: 1200px;
-    min-height: 100vh;
+    height: 100vh;
     padding: 2rem;
     position: relative;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
 }
@@ -541,9 +543,15 @@ input[type="text"]:focus {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    pointer-events: none;
+}
+
+.modal-overlay.active, .modal-overlay:not(.hidden) {
+    pointer-events: auto;
 }
 
 .modal {
+    pointer-events: auto;
     animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     max-width: 500px;
 }
@@ -573,6 +581,11 @@ input[type="text"]:focus {
     align-items: center;
     gap: 1rem;
     z-index: 1000;
+    pointer-events: none;
+}
+
+.game-footer * {
+    pointer-events: auto;
 }
 
 .role-badge {
