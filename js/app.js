@@ -330,14 +330,15 @@ class AvalonApp {
         // 1. Quest Track (Fate Panel)
         const track = document.getElementById('quest-track');
         track.innerHTML = config.quests.map((q, i) => {
+            const isCurrent = i === state.questHistory.length;
             let cls = 'quest-node';
-            if (i === state.questHistory.length) cls += ' active';
+            if (isCurrent) cls += ' active';
             if (state.questHistory[i] === 'success') cls += ' success';
             if (state.questHistory[i] === 'fail') cls += ' fail';
             const double = config.doubleFailRequired && i === 3 ? '*' : '';
             return `
-                <div class="quest-container">
-                    <span class="quest-label">Q${i+1}</span>
+                <div class="quest-container ${isCurrent ? 'active' : ''}">
+                    <span class="quest-label">Q${i+1}${isCurrent ? ' <small>(Current)</small>' : ''}</span>
                     <div class="${cls}"><span class="quest-size">${q}${double}</span></div>
                 </div>
             `;
@@ -363,8 +364,7 @@ class AvalonApp {
         
         const narrativeEl = document.getElementById('vote-narrative');
         narrativeEl.innerText = narratives[state.rejections];
-        if (state.rejections >= 4) narrativeEl.style.color = 'var(--accent-crimson)';
-        else narrativeEl.style.color = 'var(--text-secondary)';
+        narrativeEl.className = `vote-narrative rejection-${state.rejections}`;
 
         // 3. Phase info
         const context = document.getElementById('phase-context');
