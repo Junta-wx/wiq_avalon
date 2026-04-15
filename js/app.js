@@ -36,9 +36,12 @@ class AvalonApp {
         this.btnCreate.onclick = () => this.createRoom();
         this.btnJoin.onclick = () => this.joinRoom();
 
-        // Room
-        document.getElementById('btn-start-game').onclick = () => this.startGame();
-        document.getElementById('btn-fill-dummies').onclick = () => this.fillWithDummies();
+        document.getElementById('link-how-to-play').onclick = () => {
+            document.getElementById('modal-overlay').classList.remove('hidden');
+            document.getElementById('instructions-modal').classList.remove('hidden');
+        };
+
+        document.getElementById('btn-close-instructions').onclick = () => this.hideModal();
 
         // Role
         document.getElementById('role-card').onclick = (e) => {
@@ -105,22 +108,12 @@ class AvalonApp {
         this.showScreen('room');
     }
 
-    fillWithDummies() {
-        const dummiesNeeded = 5 - this.game.state.players.length;
-        if (dummiesNeeded <= 0) return this.notify('Already have 5 or more players');
-
-        for (let i = 1; i <= dummiesNeeded; i++) {
-            const id = `dummy-${Math.random().toString(36).substr(2, 5)}`;
-            this.processAction({ type: ACTION_TYPES.JOIN, id, name: `Bot ${i}` });
-        }
-    }
-
     processAction(data) {
         const state = this.game.state;
         switch (data.type) {
             case ACTION_TYPES.JOIN:
                 if (state.players.length < 10) {
-                    state.players.push({ id: data.id, name: data.name, role: null, ready: false, isDummy: data.id.startsWith('dummy') });
+                    state.players.push({ id: data.id, name: data.name, role: null, ready: false });
                 }
                 break;
             case ACTION_TYPES.READY:
@@ -140,46 +133,7 @@ class AvalonApp {
                 break;
         }
 
-        // Logic for Dummies (Host Only)
-        if (this.network.isHost) {
-            this.handleDummyActions(state);
-        }
-
         this.network.broadcast(state);
-    }
-
-    handleDummyActions(state) {
-        const dummies = state.players.filter(p => p.isDummy);
-        
-        // Auto-Ready
-        if (state.phase === PHASES.ROLES) {
-            dummies.filter(d => !d.ready).forEach(d => {
-                this.game.setPlayerReady(d.id);
-            });
-        }
-
-        // Auto-Vote
-        if (state.phase === PHASES.VOTING) {
-            dummies.filter(d => state.votes[d.id] === undefined).forEach(d => {
-                this.game.submitVote(d.id, true); // Always approve
-            });
-        }
-
-        // Auto-Quest
-        if (state.phase === PHASES.QUEST) {
-            const dummiesOnTeam = state.selectedTeam.filter(id => id.startsWith('dummy'));
-            // Dummies on team are processed one by one as they haven't "voted" yet
-            // The game engine expects questVotes to be pushed until questSize is reached
-            const currentQuestVotes = state.questVotes.length;
-            const questSize = state.selectedTeam.length;
-            
-            // This is a bit tricky since questVotes is just an array of booleans.
-            // We'll just fill the remaining votes with success if they are dummies.
-            // (In a real game, this needs better tracking, but for solo test this works)
-            while (state.questVotes.length < questSize) {
-                this.game.submitQuestVote(true); // Always succeed
-            }
-        }
     }
 
     startGame() {
@@ -217,6 +171,7 @@ class AvalonApp {
         document.getElementById('modal-overlay').classList.add('hidden');
         document.getElementById('vote-modal').classList.add('hidden');
         document.getElementById('quest-modal').classList.add('hidden');
+        document.getElementById('instructions-modal').classList.add('hidden');
     }
 
     render(state) {
