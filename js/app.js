@@ -43,6 +43,9 @@ class AvalonApp {
 
         document.getElementById('btn-close-instructions').onclick = () => this.hideModal();
 
+        // Room
+        document.getElementById('btn-start-game').onclick = () => this.startGame();
+
         // Role
         document.getElementById('role-card').onclick = (e) => {
             e.currentTarget.classList.add('revealed');
@@ -58,6 +61,11 @@ class AvalonApp {
         document.getElementById('btn-vote-reject').onclick = () => this.submitVote(false);
         document.getElementById('btn-quest-success').onclick = () => this.submitQuestVote(true);
         document.getElementById('btn-quest-fail').onclick = () => this.submitQuestVote(false);
+
+        document.getElementById('btn-copy-id').onclick = () => {
+            const id = document.getElementById('display-room-id').innerText;
+            navigator.clipboard.writeText(id).then(() => this.notify('Room ID copied!'));
+        };
 
         // Initialize Peer
         try {
