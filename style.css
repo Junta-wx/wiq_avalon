@@ -320,8 +320,8 @@ input[type="text"]:focus {
 
 .card-back.merlin { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/merlin.png'); }
 .card-back.assassin { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/assassin.png'); }
-.card-back.good { background-color: var(--good-blue); }
-.card-back.evil { background-color: var(--evil-red); }
+.card-back.good { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/servant.png'); background-size: cover; }
+.card-back.evil { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/minion.png'); background-size: cover; }
 
 .loyalty-tag {
     font-family: var(--font-heading);
