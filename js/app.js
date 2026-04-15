@@ -26,8 +26,15 @@ class AvalonApp {
         };
 
         // Lobby
-        document.getElementById('btn-create-room').onclick = () => this.createRoom();
-        document.getElementById('btn-join-room').onclick = () => this.joinRoom();
+        this.btnCreate = document.getElementById('btn-create-room');
+        this.btnJoin = document.getElementById('btn-join-room');
+        
+        this.btnCreate.disabled = true;
+        this.btnJoin.disabled = true;
+        this.btnCreate.innerText = 'Initializing...';
+
+        this.btnCreate.onclick = () => this.createRoom();
+        this.btnJoin.onclick = () => this.joinRoom();
 
         // Room
         document.getElementById('btn-start-game').onclick = () => this.startGame();
@@ -50,8 +57,16 @@ class AvalonApp {
         document.getElementById('btn-quest-fail').onclick = () => this.submitQuestVote(false);
 
         // Initialize Peer
-        await this.network.init();
-        console.log('App initialized with ID:', this.network.playerId);
+        try {
+            await this.network.init();
+            this.btnCreate.disabled = false;
+            this.btnJoin.disabled = false;
+            this.btnCreate.innerText = 'Create New Room';
+            console.log('App initialized with ID:', this.network.playerId);
+        } catch (err) {
+            this.notify('Failed to connect to signaling server.');
+            console.error(err);
+        }
     }
 
     notify(msg) {
