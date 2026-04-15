@@ -41,13 +41,16 @@
             
             <div id="host-controls" class="glass-panel hidden">
                 <h3>Game Settings</h3>
-                <div class="roles-selection">
+                <div class="roles-selection" style="margin-bottom: 1rem;">
                     <label><input type="checkbox" id="role-percival" checked> Percival</label>
                     <label><input type="checkbox" id="role-morgana" checked> Morgana</label>
                     <label><input type="checkbox" id="role-mordred"> Mordred</label>
                     <label><input type="checkbox" id="role-oberon"> Oberon</label>
                 </div>
-                <button id="btn-start-game" class="btn primary">Start Game</button>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <button id="btn-start-game" class="btn primary">Start Game</button>
+                    <button id="btn-fill-dummies" class="btn secondary" style="font-size: 0.8rem;">Fill with Dummies (Test)</button>
+                </div>
             </div>
             
             <div id="client-waiting" class="waiting-msg">
