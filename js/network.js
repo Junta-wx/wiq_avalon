@@ -5,7 +5,8 @@ export const ACTION_TYPES = {
     PICK_TEAM: 'PICK_TEAM',
     VOTE: 'VOTE',
     QUEST_VOTE: 'QUEST_VOTE',
-    ASSASSINATE: 'ASSASSINATE'
+    ASSASSINATE: 'ASSASSINATE',
+    PROCEED_TO_ROLES: 'PROCEED_TO_ROLES'
 };
 
 export class NetworkManager {

@@ -60,20 +60,35 @@
             </div>
         </section>
 
+        <!-- Leader Reveal Phase -->
+        <section id="leader-screen" class="screen">
+            <div class="crown-icon" style="font-size: 5rem; margin-bottom: 1rem;">👑</div>
+            <h2 class="title">First Leader</h2>
+            <div class="glass-panel" style="text-align: center;">
+                <h1 id="first-leader-name" class="subtitle" style="font-size: 3rem;">-</h1>
+                <p>The quest for the Grail begins with you.</p>
+            </div>
+            <div id="leader-controls" class="hidden" style="margin-top: 2rem;">
+                <button id="btn-proceed-to-roles" class="btn primary">Reveal Identities</button>
+            </div>
+        </section>
+
         <!-- Role Reveal Phase -->
         <section id="role-screen" class="screen">
-            <h2 class="title">Reveal Your Identity</h2>
+            <h2 class="title" style="font-size: 3rem;">Your Identity</h2>
             <div class="card-container">
                 <div id="role-card" class="card hidden-role">
                     <div class="card-front">?</div>
                     <div class="card-back">
-                        <h3 id="role-name">Role Name</h3>
-                        <p id="role-desc">Role description goes here.</p>
+                        <div id="role-loyalty" class="loyalty-tag">LOYALTY</div>
+                        <h2 id="role-name" class="subtitle" style="margin: 0.5rem 0;">Role Name</h2>
+                        <hr style="width: 80%; border: 0.5px solid rgba(255,255,255,0.1); margin: 1rem 0;">
+                        <p id="role-desc" style="font-size: 0.9rem; font-style: italic; color: #ccc;">Role description goes here.</p>
                         <div id="role-knowledge" class="knowledge-box"></div>
                     </div>
                 </div>
             </div>
-            <button id="btn-ready" class="btn primary">Ready</button>
+            <button id="btn-ready" class="btn primary">I Understand My Role</button>
         </section>
 
         <!-- Main Game Phase -->

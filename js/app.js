@@ -20,6 +20,7 @@ class AvalonApp {
         this.screens = {
             lobby: document.getElementById('lobby-screen'),
             room: document.getElementById('room-screen'),
+            leader: document.getElementById('leader-screen'),
             role: document.getElementById('role-screen'),
             game: document.getElementById('game-screen'),
             end: document.getElementById('end-screen')
@@ -58,6 +59,11 @@ class AvalonApp {
             this.network.send({ type: ACTION_TYPES.READY, id: this.network.playerId });
             document.getElementById('btn-ready').disabled = true;
             document.getElementById('btn-ready').innerText = 'Waiting...';
+        };
+
+        // Leader
+        document.getElementById('btn-proceed-to-roles').onclick = () => {
+            this.network.send({ type: ACTION_TYPES.PROCEED_TO_ROLES });
         };
 
         // Modals
@@ -143,6 +149,9 @@ class AvalonApp {
             case ACTION_TYPES.ASSASSINATE:
                 this.game.assassinate(data.targetId);
                 break;
+            case ACTION_TYPES.PROCEED_TO_ROLES:
+                this.game.proceedToRoles();
+                break;
         }
 
         this.network.broadcast(state);
@@ -218,6 +227,7 @@ class AvalonApp {
             if (state.players.length > 0) this.showScreen('room');
             else this.showScreen('lobby');
         }
+        else if (state.phase === PHASES.LEADER_REVEAL) this.renderLeaderReveal(state);
         else if (state.phase === PHASES.ROLES) this.renderRoleReveal(state);
         else if (state.phase === PHASES.END) this.renderEnd(state);
         else this.renderGame(state);
@@ -241,6 +251,18 @@ class AvalonApp {
         }
     }
 
+    renderLeaderReveal(state) {
+        this.showScreen('leader');
+        const leader = state.players[state.leaderIndex];
+        document.getElementById('first-leader-name').innerText = leader.name;
+        
+        if (this.network.isHost) {
+            document.getElementById('leader-controls').classList.remove('hidden');
+        } else {
+            document.getElementById('leader-controls').classList.add('hidden');
+        }
+    }
+
     renderRoleReveal(state) {
         this.showScreen('role');
         const me = state.players.find(p => p.id === this.network.playerId);
@@ -248,18 +270,26 @@ class AvalonApp {
 
         const roleCard = document.getElementById('role-card');
         const cardBack = roleCard.querySelector('.card-back');
+        const loyaltyTag = document.getElementById('role-loyalty');
         
         // Clear previous classes
         cardBack.className = 'card-back';
+        loyaltyTag.className = 'loyalty-tag';
         
-        // Add role-specific class
+        const roleInfo = ROLES[me.role];
+        const team = roleInfo.team;
+
+        // Add role-specific class and loyalty
         if (me.role === ROLE_TYPES.MERLIN) cardBack.classList.add('merlin');
         else if (me.role === ROLE_TYPES.ASSASSIN) cardBack.classList.add('assassin');
-        else if (ROLES[me.role].team === TEAMS.GOOD) cardBack.classList.add('good');
+        else if (team === TEAMS.GOOD) cardBack.classList.add('good');
         else cardBack.classList.add('evil');
 
-        document.getElementById('role-name').innerText = me.role;
-        document.getElementById('role-desc').innerText = ROLES[me.role].description;
+        loyaltyTag.innerText = team.toUpperCase();
+        loyaltyTag.classList.add(team.toLowerCase());
+
+        document.getElementById('role-name').innerText = roleInfo.name;
+        document.getElementById('role-desc').innerText = roleInfo.description;
         
         const knowledge = getKnowledge(me.role, state.players);
         const kBox = document.getElementById('role-knowledge');
@@ -274,7 +304,7 @@ class AvalonApp {
             document.getElementById('btn-ready').innerText = 'Waiting...';
         } else {
             document.getElementById('btn-ready').disabled = false;
-            document.getElementById('btn-ready').innerText = 'I am Ready';
+            document.getElementById('btn-ready').innerText = 'I Understand My Role';
         }
     }
 

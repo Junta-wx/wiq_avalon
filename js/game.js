@@ -2,6 +2,7 @@ import { GAME_CONFIGS, ROLES, ROLE_TYPES, TEAMS } from './roles.js';
 
 export const PHASES = {
     LOBBY: 'LOBBY',
+    LEADER_REVEAL: 'LEADER_REVEAL', // New
     ROLES: 'ROLES',
     PROPOSING: 'PROPOSING',
     VOTING: 'VOTING',
@@ -32,12 +33,18 @@ export class AvalonGame {
 
     // Host Only: Start game
     startGame(roles) {
-        this.state.phase = PHASES.ROLES;
+        this.state.phase = PHASES.LEADER_REVEAL; // Transition to Leader Reveal first
         this.state.players.forEach((p, i) => {
             p.role = roles[i];
             p.ready = false;
         });
         this.state.leaderIndex = Math.floor(Math.random() * this.state.players.length);
+    }
+
+    proceedToRoles() {
+        if (this.state.phase === PHASES.LEADER_REVEAL) {
+            this.state.phase = PHASES.ROLES;
+        }
     }
 
     setPlayerReady(playerId) {

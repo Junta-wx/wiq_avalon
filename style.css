@@ -9,6 +9,8 @@
     --text-secondary: #a0a0a0;
     --good-color: #2ecc71;
     --evil-color: #e74c3c;
+    --good-blue: #1a3a5f;
+    --evil-red: #3b0a0a;
     --font-heading: 'Cinzel', serif;
     --font-body: 'Inter', sans-serif;
     --shadow-soft: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
@@ -303,8 +305,29 @@ input[type="text"]:focus {
 
 .card-back.merlin { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/merlin.png'); }
 .card-back.assassin { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/assassin.png'); }
-.card-back.good { background-color: #1a3a5f; }
-.card-back.evil { background-color: #3b0a0a; }
+.card-back.good { background-color: var(--good-blue); }
+.card-back.evil { background-color: var(--evil-red); }
+
+.loyalty-tag {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    padding: 0.3rem 1.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+.loyalty-tag.good { background: #3498db; color: white; }
+.loyalty-tag.evil { background: #e74c3c; color: white; }
+
+.crown-icon {
+    animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
 
 /* Knowledge Box */
 .knowledge-box {

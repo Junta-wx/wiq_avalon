@@ -1,12 +1,12 @@
 export const ROLE_TYPES = {
     MERLIN: 'Merlin',
     PERCIVAL: 'Percival',
-    SERVANT: 'Loyal Servant',
+    SERVANT: 'Loyal Servant of Arthur', // Updated
     ASSASSIN: 'Assassin',
     MORGANA: 'Morgana',
     MORDRED: 'Mordred',
     OBERON: 'Oberon',
-    MINION: 'Minion of Mordred'
+    MINION: 'Minion of Mordred' // Updated
 };
 
 export const TEAMS = {
@@ -15,14 +15,14 @@ export const TEAMS = {
 };
 
 export const ROLES = {
-    [ROLE_TYPES.MERLIN]: { team: TEAMS.GOOD, description: 'Knows Evil (except Mordred)' },
-    [ROLE_TYPES.PERCIVAL]: { team: TEAMS.GOOD, description: 'Knows Merlin and Morgana' },
-    [ROLE_TYPES.SERVANT]: { team: TEAMS.GOOD, description: 'Loyal Servant of Arthur' },
-    [ROLE_TYPES.ASSASSIN]: { team: TEAMS.EVIL, description: 'Can kill Merlin at end to win' },
-    [ROLE_TYPES.MORGANA]: { team: TEAMS.EVIL, description: 'Appears as Merlin to Percival' },
-    [ROLE_TYPES.MORDRED]: { team: TEAMS.EVIL, description: 'Hidden from Merlin' },
-    [ROLE_TYPES.OBERON]: { team: TEAMS.EVIL, description: 'Hidden from Evil, doesn\'t know Evil' },
-    [ROLE_TYPES.MINION]: { team: TEAMS.EVIL, description: 'Minion of Mordred' }
+    [ROLE_TYPES.MERLIN]: { team: TEAMS.GOOD, name: 'Merlin', description: 'You know exactly who the agents of Evil are (except Mordred). You must lead the Good players to victory without revealing your identity to the Assassin.' },
+    [ROLE_TYPES.PERCIVAL]: { team: TEAMS.GOOD, name: 'Percival', description: 'You know who Merlin and Morgana are, but not which is which. Your job is to protect and follow the true Merlin.' },
+    [ROLE_TYPES.SERVANT]: { team: TEAMS.GOOD, name: 'Loyal Servant of Arthur', description: 'You are a loyal companion of Arthur. You do not know anyone else\'s identity. Your goal is to succeed quests.' },
+    [ROLE_TYPES.ASSASSIN]: { team: TEAMS.EVIL, name: 'Assassin', description: 'You are an agent of Evil. If Good succeeds 3 quests, you have one final chance to identify Merlin and steal the victory.' },
+    [ROLE_TYPES.MORGANA]: { team: TEAMS.EVIL, name: 'Morgana', description: 'You are an agent of Evil. You appear as Merlin to Percival, confusing the forces of Good.' },
+    [ROLE_TYPES.MORDRED]: { team: TEAMS.EVIL, name: 'Mordred', description: 'You are the ultimate Evil. You are hidden from Merlin\'s sight, making you the most dangerous Minion.' },
+    [ROLE_TYPES.OBERON]: { team: TEAMS.EVIL, name: 'Oberon', description: 'You are a chaotic agent of Evil. You are unknown to your allies, and you do not know them. Useful for sowing confusion.' },
+    [ROLE_TYPES.MINION]: { team: TEAMS.EVIL, name: 'Minion of Mordred', description: 'You are an agent of Evil. You know your fellow Minions. Your goal is to fail quests and confuse Merlin.' }
 };
 
 export const GAME_CONFIGS = {
